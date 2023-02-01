@@ -74,6 +74,7 @@ export function processTreeDomain(domainNode: MBeanNode) {
     const routesNode = context.get('routes')
     adoptChild(newCtxNode, routesNode, 'routes', endPointFolderIcon)
     setChildIcon(routesNode, routeIcon)
+    // routesNode
 
     const endpointsNode = context.get('endpoints')
     adoptChild(newCtxNode, endpointsNode, 'endpoints', endPointFolderIcon)
