@@ -22,10 +22,11 @@
     "patternfly"
   ],
   "scripts": {
+    "generate:camel-model": "cd src/plugins/camel/model > /dev/null && ./mvnw compile",
     "build": "tsup --clean",
     "build:watch": "tsup --watch",
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watch --verbose --silent=false",
     "test:coverage": "jest --coverage",
     "prepack": "yarn build"
   },
@@ -35,11 +36,13 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/clone": "^2.1.1",
     "@types/jest": "^29.4.0",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/react-router-dom": "^5.3.3",
+    "clone": "^2.1.2",
     "jolokia.js": "1.7.2",
     "jquery": "^3.6.3",
     "js-logger": "^1.6.1",

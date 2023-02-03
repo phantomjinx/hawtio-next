@@ -2,6 +2,7 @@ import React from 'react'
 import { MBeanNode } from '@hawtio/plugins/shared'
 import { jmxDomain } from './globals'
 import { jolokiaService } from '@hawtio/plugins/connect/jolokia-service'
+import { routesService } from './routes-service'
 import { CamelIcon, EndPointFolderIcon, EndPointIcon, RouteIcon } from './icons'
 
 //
@@ -74,7 +75,8 @@ export function processTreeDomain(domainNode: MBeanNode) {
     const routesNode = context.get('routes')
     adoptChild(newCtxNode, routesNode, 'routes', endPointFolderIcon)
     setChildIcon(routesNode, routeIcon)
-    // routesNode
+
+    routesService.transformXml(newCtxNode, routesNode)
 
     const endpointsNode = context.get('endpoints')
     adoptChild(newCtxNode, endpointsNode, 'endpoints', endPointFolderIcon)

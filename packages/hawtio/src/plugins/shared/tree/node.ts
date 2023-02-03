@@ -9,8 +9,6 @@ import { ILogger } from 'js-logger'
 
 const nodeLoggers: Map<string, ILogger> = new Map<string, ILogger>()
 
-export type ProcessingTask = (node: MBeanNode) => Promise<boolean>;
-
 export class MBeanNode implements TreeViewDataItem {
   owner: string
   id: string
@@ -132,6 +130,14 @@ export class MBeanNode implements TreeViewDataItem {
     return this.children ? this.children.length : 0
   }
 
+  getProperty(key: string): string {
+    if (!this.properties) {
+      return ''
+    }
+
+    return this.properties[key]
+  }
+
   addProperty(key: string, value: string) {
     if (!this.properties) {
       this.properties = {}
@@ -206,14 +212,6 @@ export class MBeanNode implements TreeViewDataItem {
   setIcons(icon: React.ReactNode) {
     this.icon = icon
     this.expandedIcon = icon
-  }
-
-  registerProcessingTask(task: ProcessingTask) {
-    if (! processingTasks) {
-      processingTasks = new Map<string, ProcessingTask>()
-    }
-
-    processingTasks.set()
   }
 }
 
