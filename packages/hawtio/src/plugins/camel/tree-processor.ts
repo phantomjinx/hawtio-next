@@ -1,5 +1,5 @@
 import { jolokiaService } from '@hawtiosrc/plugins/connect/jolokia-service'
-import { MBeanNode } from '@hawtiosrc/plugins/shared'
+import { MBeanNode } from '@hawtiosrc/plugins/shared/tree'
 import React from 'react'
 import { jmxDomain, camelContexts, camelCtx, routes, endpoints, components, dataformats } from './globals'
 import { routesService } from './routes-service'
