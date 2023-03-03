@@ -1,5 +1,5 @@
 import React from 'react'
-import { MBeanNode } from '@hawtiosrc/plugins/shared/tree'
+import { emptyParent, MBeanNode } from '@hawtiosrc/plugins/shared/tree'
 import { jolokiaService } from '@hawtiosrc/plugins/connect/jolokia-service'
 import { log, routeNode } from './globals'
 import { schemaService } from './schema-service'
@@ -53,8 +53,8 @@ class RoutesService {
     const nodeSettings = schemaService.getSchema(nodeName)
     if (nodeSettings) {
       const id = routeXml.getAttribute('id') || nodeName
-      const node = new MBeanNode(parent.owner, id, nodeName, false)
       ccs.setType(node, routeNode)
+      const node = new MBeanNode(emptyParent, id, nodeName, false)
       ccs.setDomain(node)
       const icon: React.ReactNode = this.getIcon(nodeSettings)
       node.setIcons(icon)

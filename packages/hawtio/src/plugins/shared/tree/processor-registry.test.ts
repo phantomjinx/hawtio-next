@@ -1,4 +1,4 @@
-import { MBeanNode } from './node'
+import { emptyParent, MBeanNode } from './node'
 import { treeProcessorRegistry } from './processor-registry'
 
 describe('treeProcessorRegistry', () => {
@@ -10,7 +10,7 @@ describe('treeProcessorRegistry', () => {
     expect(treeProcessorRegistry).not.toBeNull()
     expect(treeProcessorRegistry.getProcessors()).toEqual({})
 
-    const node = new MBeanNode('test', 'test-id', 'Test Node', true)
+    const node = new MBeanNode(emptyParent, 'test-id', 'Test Node', true)
 
     // Processing without processors should not throw an error
     expect(() => treeProcessorRegistry.process('test', node)).not.toThrowError()

@@ -3,7 +3,7 @@ import { escapeDots, escapeTags } from '@hawtiosrc/util/jolokia'
 import { stringSorter } from '@hawtiosrc/util/strings'
 import { IJmxDomain, IJmxDomains } from 'jolokia.js'
 import { pluginName } from '../globals'
-import { MBeanNode } from './node'
+import { emptyParent, MBeanNode, FilterFunc } from './node'
 import { treeProcessorRegistry } from './processor-registry'
 
 const log = Logger.get(`${pluginName}-tree`)
@@ -27,7 +27,7 @@ export class MBeanTree {
     return mBeanTree
   }
 
-  static filter(originalTree: MBeanNode[], filter: (node: MBeanNode) => boolean): MBeanNode[] {
+  static filter(originalTree: MBeanNode[], filter: FilterFunc): MBeanNode[] {
     const filteredTree: MBeanNode[] = []
     for (const node of originalTree) {
       const copy = node.filterClone(filter)
@@ -70,7 +70,7 @@ export class MBeanTree {
     }
 
     const id = escapeDots(name)
-    const newNode = new MBeanNode(this.id, id, name, true)
+    const newNode = new MBeanNode(emptyParent, id, name, true)
     this.tree.push(newNode)
     return newNode
   }
@@ -103,7 +103,7 @@ export class MBeanTree {
    * @param {Function} filter
    * @return {Folder}
    */
-  findDescendant(filter: (node: MBeanNode) => boolean): MBeanNode | null {
+  findDescendant(filter: FilterFunc): MBeanNode | null {
     let answer: MBeanNode | null = null
     this.tree.forEach(child => {
       if (!answer) {
