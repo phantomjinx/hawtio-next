@@ -19,6 +19,7 @@ import { NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { CamelContext } from './context'
 import { Attributes, Operations, Chart, JmxContentMBeans, MBeanNode } from '@hawtiosrc/plugins/shared'
 import { Contexts } from './contexts'
+import { Exchanges } from './exchanges'
 import * as ccs from './camel-content-service'
 
 export const CamelContent: React.FunctionComponent = () => {
@@ -52,12 +53,8 @@ export const CamelContent: React.FunctionComponent = () => {
     ccs.hasMBean(node) && !ccs.isContextsFolder(node) && !ccs.isRoutesFolder(node) && !ccs.isRouteNode(node)
 
   const allNavItems: NavItem[] = [
-    {
-      id: 'contexts',
-      title: 'Contexts',
-      component: Contexts,
-      isApplicable: (node: MBeanNode) => ccs.isContextsFolder(node),
-    },
+    { id: 'contexts', title: 'Contexts', component: Contexts, isApplicable: (node: MBeanNode) => ccs.isContextsFolder(node) },
+    { id: 'exchanges', title: 'Exchanges', component: Exchanges, isApplicable: (node: MBeanNode) => !ccs.isExchange(node) },
     { id: 'attributes', title: 'Attributes', component: Attributes, isApplicable: mBeanApplicable },
     { id: 'operations', title: 'Operations', component: Operations, isApplicable: mBeanApplicable },
     { id: 'chart', title: 'Chart', component: Chart, isApplicable: mBeanApplicable },
