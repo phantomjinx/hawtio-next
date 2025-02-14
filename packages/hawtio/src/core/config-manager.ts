@@ -16,6 +16,11 @@ export type Hawtconfig = {
   branding?: BrandingConfig
 
   /**
+   * Configuration for the placement and structure of the UI
+   */
+  appearance?: AppearanceConfig
+
+  /**
    * Configuration for the built-in login page.
    */
   login?: LoginConfig
@@ -53,6 +58,23 @@ export type BrandingConfig = {
   appLogoUrl?: string
   css?: string
   favicon?: string
+}
+
+/**
+ * Appearance configuration type.
+ */
+export type AppearanceConfig = {
+  // Whether to display the header bar (default: true)
+  showHeader?: boolean
+
+  // Whether to display the brand logo on the header bar (default: true)
+  showBrand?: boolean
+
+  // Whether to display the user header dropdown on the header bar (default: true)
+  showUserHeader?: boolean
+
+  // Whether to display the sidebar (default: true)
+  showSideBar?: boolean
 }
 
 /**
@@ -235,6 +257,66 @@ class ConfigManager {
       config.about.productInfo = []
     }
     config.about.productInfo.push({ name, value })
+  }
+
+  /*
+   * Synchronous method to retrieve the appearance.showHeader
+   * property from the existing hawtconfig. The hawtconfig
+   * should have been obtained using an async process,
+   * eg. the #useHawtconfig hook
+   */
+  isHeaderShown(hawtconfig: Hawtconfig): boolean {
+    if (!hawtconfig) return true
+
+    const appearance = hawtconfig.appearance
+    if (!appearance) return true
+
+    return appearance.showHeader ?? true
+  }
+
+  /*
+   * Synchronous method to retrieve the appearance.showBrand
+   * property from the existing hawtconfig. The hawtconfig
+   * should have been obtained using an async process,
+   * eg. the #useHawtconfig hook
+   */
+  isBrandShown(hawtconfig: Hawtconfig): boolean {
+    if (!hawtconfig) return true
+
+    const appearance = hawtconfig.appearance
+    if (!appearance) return true
+
+    return appearance.showBrand ?? true
+  }
+
+  /*
+   * Synchronous method to retrieve the appearance.showUserHeader
+   * property from the existing hawtconfig. The hawtconfig
+   * should have been obtained using an async process,
+   * eg. the #useHawtconfig hook
+   */
+  isUserHeaderShown(hawtconfig: Hawtconfig): boolean {
+    if (!hawtconfig) return true
+
+    const appearance = hawtconfig.appearance
+    if (!appearance) return true
+
+    return appearance.showUserHeader ?? true
+  }
+
+  /*
+   * Synchronous method to retrieve the appearance.showSideBar
+   * property from the existing hawtconfig. The hawtconfig
+   * should have been obtained using an async process,
+   * eg. the #useHawtconfig hook
+   */
+  isSideBarShown(hawtconfig: Hawtconfig): boolean {
+    if (!hawtconfig) return true
+
+    const appearance = hawtconfig.appearance
+    if (!appearance) return true
+
+    return appearance.showSideBar ?? true
   }
 }
 
