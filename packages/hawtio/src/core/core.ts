@@ -9,7 +9,9 @@ const DEFAULT_REMOTE_ENTRY_FILE = 'remoteEntry.js'
 const DEFAULT_PLUGIN_ORDER = 100
 const DEFAULT_PLUGIN_ENTRY = 'plugin'
 const HAWTIO_DISABLE_THEME_LISTENER = 'hawtio.disableThemeListener'
-const PATTERNFLY_THEME_CLASS = 'pf-v5-theme-dark'
+
+export const PATTERNFLY_MAJOR_VERSION = process.env.PATTERNFLY_MAJOR_VERSION || '6'
+const PATTERNFLY_THEME_CLASS = `pf-v${PATTERNFLY_MAJOR_VERSION}-theme-dark`
 
 /**
  * Components to be added to the header navbar
@@ -588,8 +590,10 @@ export class HawtioCore implements IHawtio {
    */
   private updateFromTheme() {
     if (this.windowTheme() === 'dark') {
+      log.debug(`Adding patternfly theme class: ${PATTERNFLY_THEME_CLASS} to document element`)
       document.documentElement.classList.add(PATTERNFLY_THEME_CLASS)
     } else {
+      log.debug(`Removing patternfly theme class: ${PATTERNFLY_THEME_CLASS} to document element`)
       document.documentElement.classList.remove(PATTERNFLY_THEME_CLASS)
     }
   }
